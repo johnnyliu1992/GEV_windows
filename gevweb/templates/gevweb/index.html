@@ -1,0 +1,60 @@
+{% extends 'gevweb/base.html' %}
+{% block content %}
+{% load static %}
+<br>
+<form method="post" enctype="multipart/form-data">
+  <h2>Upload your Gene Expression data</h2>
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Upload</button>
+</form>
+
+<form method="post" enctype="multipart/form-data">
+  <h2>Upload your feature data</h2>
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Upload</button>
+</form>
+
+<br><br>
+
+
+{% if gef_name %}
+<table width="500">
+<tr>
+<td>
+<h4>The Gene Expression file you uploaded is:</h4>
+{{ gef_name }}
+</td>
+</tr>
+</table>
+{% endif %}
+
+<br>
+
+{% if ff_name %}
+<table width="500">
+<tr>
+<td>
+<h4>The feature file you uploaded is:</h4>
+{{ ff_name }}
+</td>
+</tr>
+</table>
+{% endif %}
+
+<br>
+<br>
+
+{% if gef_name and ff_name %}
+<form action="{% url 'analyze' %}" method="GET"> 
+{% csrf_token %}
+<input type="submit" value="Proceed to analyze">
+</form>
+{% endif %}
+
+<br><br><br>
+<img src="{% static 'gevweb/arrowdown.png' %}" alt="Smiley face" float="right" height="200" width="200"><br>
+<p style="font-size:17px;">Sample data for analyzing can be downloaded here: <a href="/gevweb/download_sample/gene_expression_sample.csv">gene_expression_sample.csv</a> and <a href="/gevweb/download_sample/patient_feature_sample.csv">patient_feature_sample.csv</a>.</p>
+
+{% endblock %}

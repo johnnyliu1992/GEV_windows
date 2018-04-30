@@ -1,0 +1,84 @@
+{% extends 'gevweb/base.html' %}
+{% block content %}
+{% load static %}
+<h3>Hierarchy Clustering Parameters Setup:</h3>
+
+<form action="{% url 'analyze' %}" method="POST"> 
+{% csrf_token %}
+
+<p>The number of clusters to find.</p>
+<input type="text" name="n_clusters" style="width: 250px;" placeholder="Default is 10 <a positive integer>">
+
+<p>Linkage Method:</p>
+  <select name="linkage">
+    <option selected value="ward">ward</option>
+    <option value="complete">complete</option>
+    <option value="average">average</option>
+  </select>
+
+<br><br>
+<input type="submit" value="Show analyze result">
+</form>
+
+<br>
+
+{% if rows_data %}
+<p>The number of clusters to find: <b>{{num_of_clusters}}</b></p>
+<p>Linkage Method: <b>{{linkage}}</b></p>
+
+{% endif %}
+
+
+<table id="table_id" align="center">
+  
+  <tr>
+  {% for i in head %}
+  <th>{{ i }}</th>
+  {% endfor %}
+  </tr>
+  
+  {% for i in rows_data %}
+  <tr>
+	{% for j in i %}
+	<td class="cell">{{ j }}</td>
+	{% endfor %}
+  </tr>
+  {% endfor %}
+
+
+
+</table>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#table_id td.cell').each(function(){
+        if ($(this).text() == '+++') {
+            $(this).css('background-color','#b32400');
+        }
+		if ($(this).text() == '++') {
+            $(this).css('background-color','#ff5c33');
+        }
+		if ($(this).text() == '+') {
+            $(this).css('background-color','#ffc2b3');
+        }
+    });
+});
+
+</script>
+
+
+
+
+<br>
+<center>Jiannan Liu 2018</center>
+<br><br><br><br><br><br>
+
+
+
+
+
+
+{% endblock %}

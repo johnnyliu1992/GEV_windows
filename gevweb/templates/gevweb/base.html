@@ -1,0 +1,41 @@
+{% load static%}
+
+
+<html>
+<head>
+<title>Gene Expression Clustering Visualization</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<link rel="stylesheet" href="{% static 'gevweb/style.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'gevweb/bootstrap-responsive.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'gevweb/bootstrap.css' %}" type="text/css" media="all">
+<style>
+li {
+    margin: 25px;
+	font-size: 20;
+}
+table, th, td {
+   border: 1px solid black;
+   text-align: center;
+}
+</style>
+</head>
+
+<body style="overflow-y:scroll">
+  <div class="container">
+    <div class="masthead">
+	  <h1 class="muted"><font color="#0066DD">Gene Expression Clustering Visualization</font></h1>
+	</div>
+	<div class="row-fluid" style="font-size:16px">
+	{% block content %}
+    {% endblock %}
+	</div>
+
+
+
+
+  </div>
+</body>
+
+
+
+</html>
